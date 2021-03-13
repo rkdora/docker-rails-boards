@@ -1,1 +1,10 @@
 inherit_from: .rubocop_todo.yml
+
+# 検査対象外のファイルを指定
+AllCops:
+  Exclude:
+    - db/schema.rb
+
+# error 'Missing top-level class documentation comment.'対策
+Style/Documentation:
+  Enabled: false

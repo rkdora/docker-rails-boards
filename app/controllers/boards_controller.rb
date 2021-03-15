@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_target_board, only: %i[show edit update destroy]
+  before_action :set_target_board, only: [:show, :edit, :update, :destroy]
 
   def index
     @boards = params[:tag_id].present? ? Tag.find(params[:tag_id]).boards : Board.all
@@ -31,7 +31,7 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      redirect_to @board, flash: {notice: "「#{@board.title}」の掲示板が更新されました"}
+      redirect_to @board, flash: { notice: "「#{@board.title}」の掲示板が更新されました" }
     else
       redirect_to :back, flash: {
         board: @board,
@@ -43,7 +43,7 @@ class BoardsController < ApplicationController
   def destroy
     @board.destroy
 
-    redirect_to boards_path, flash: {notice: "「#{@board.title}」の掲示板が削除されました"}
+    redirect_to boards_path, flash: { notice: "「#{@board.title}」の掲示板が削除されました" }
   end
 
   private

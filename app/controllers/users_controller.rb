@@ -16,8 +16,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def me
-  end
+  def me; end
 
   private
 

@@ -1,0 +1,5 @@
+<% if @current_user %>
+  <h1>ログイン中</h1>
+<% else %>
+  <%= render partial: 'users/login_form' %>
+<% end %>

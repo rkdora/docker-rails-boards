@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe 'Users', type: :request do
   describe 'GET #new' do
     before { get new_user_path }
 
@@ -21,11 +21,10 @@ RSpec.describe "Users", type: :request do
     context '正しいユーザー情報が渡ってきた場合' do
       let(:params) do
         { user: {
-            name: 'user',
-            password: 'password',
-            password_confirmation: 'password',
-          }
-        }
+          name: 'user',
+          password: 'password',
+          password_confirmation: 'password'
+        } }
       end
 
       it 'ユーザーが一人増えていること' do
@@ -33,7 +32,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'マイページにリダイレクトされること' do
-        expect(post users_path, params: params).to redirect_to(mypage_path)
+        expect(post(users_path, params: params)).to redirect_to(mypage_path)
       end
     end
   end

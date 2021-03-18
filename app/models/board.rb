@@ -18,11 +18,12 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Board < ApplicationRecord
-  has_many :comments, dependent: :delete_all
-  has_many :board_tag_relations, dependent: :delete_all
+  has_many :comments, dependent: :destroy
+  has_many :board_tag_relations, dependent: :destroy
   has_many :tags, through: :board_tag_relations
 
-  validates :name, presence: true, length: { maximum: 10 }
+  belongs_to :user
+
   validates :title, presence: true, length: { maximum: 30 }
   validates :body, presence: true, length: { maximum: 1000 }
 end

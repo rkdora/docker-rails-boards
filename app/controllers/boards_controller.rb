@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  skip_before_action :authorize!, only: [:index, :show]
   before_action :set_target_board, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -11,7 +12,9 @@ class BoardsController < ApplicationController
   end
 
   def create
-    board = Board.new(board_params)
+    # board = Board.new(board_params)
+    # binding.pry
+    board = current_user.boards.build(board_params)
     if board.save
       flash[:notice] = "「#{board.title}」の掲示板を作成しました"
       redirect_to board
@@ -49,7 +52,7 @@ class BoardsController < ApplicationController
   private
 
   def board_params
-    params.require(:board).permit(:name, :title, :body, tag_ids: [])
+    params.require(:board).permit(:title, :body, tag_ids: [])
   end
 
   def set_target_board

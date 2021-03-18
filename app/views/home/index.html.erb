@@ -1,4 +1,4 @@
-<% if @current_user %>
+<% if logged_in? %>
   <h1>ログイン中</h1>
 <% else %>
   <%= render partial: 'users/login_form' %>

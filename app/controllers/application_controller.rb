@@ -1,12 +1,11 @@
 class ApplicationController < ActionController::Base
+  include SessionsHelper
+
   protect_from_forgery with: :exception
-  before_action :current_user
+  add_flash_types :success, :info, :warning, :danger
+  before_action :authorize!
 
-  private
-
-  def current_user
-    return unless session[:user_id]
-
-    @current_user = User.find_by(id: session[:user_id])
+  def authorize!
+    redirect_to(root_path, danger: 'Please login') unless logged_in?
   end
 end

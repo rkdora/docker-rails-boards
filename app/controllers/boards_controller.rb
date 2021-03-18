@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  skip_before_action :authorize!, only: %i[index show]
   before_action :set_target_board, only: [:show, :edit, :update, :destroy]
 
   def index

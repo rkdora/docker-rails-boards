@@ -7,14 +7,17 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  board_id   :integer
+#  user_id    :integer          not null
 #
 # Indexes
 #
 #  index_comments_on_board_id  (board_id)
+#  index_comments_on_user_id   (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (board_id => boards.id)
+#  fk_rails_...  (user_id => users.id)
 #
 require 'test_helper'
 

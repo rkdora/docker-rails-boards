@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_144723) do
+ActiveRecord::Schema.define(version: 2021_03_18_132536) do
 
   create_table "board_tag_relations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "board_id"
@@ -22,20 +22,22 @@ ActiveRecord::Schema.define(version: 2021_03_16_144723) do
   end
 
   create_table "boards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
   create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "board_id"
-    t.string "name", null: false
     t.text "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["board_id"], name: "index_comments_on_board_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "tags", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -55,5 +57,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_144723) do
 
   add_foreign_key "board_tag_relations", "boards"
   add_foreign_key "board_tag_relations", "tags"
+  add_foreign_key "boards", "users"
   add_foreign_key "comments", "boards"
+  add_foreign_key "comments", "users"
 end
